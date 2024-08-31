@@ -1,0 +1,18 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.app {
+	@apply relative z-10 flex justify-center items-center flex-col mx-auto my-3 sm:px-16 px-6;
+}
+
+.input {
+	@apply border text-sm block w-full rounded-md p-3 hover:border-orange-200 focus:ring-orange-200 focus:border-orange-200;
+	@apply disabled:bg-slate-200 disabled:text-slate-400 disabled:border-opacity-0 disabled:opacity-70;
+}
+
+@layer base {
+	:root {
+		--radius: 0.5rem;
+	}
+}

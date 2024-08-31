@@ -1,3 +1,5 @@
+import Form from "@/components/form";
+
 export default function Home() {
-	return <div>Home</div>;
+	return <Form type="Create" name="Receipt" />;
 }
