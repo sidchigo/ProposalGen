@@ -1,7 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
 import dayjs from "dayjs";
-import ReactPDF from "@react-pdf/renderer";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
@@ -10,13 +9,13 @@ import {
 	query,
 	doc,
 	writeBatch,
+	runTransaction,
 } from "firebase/firestore";
 import toast, { useToasterStore } from "react-hot-toast";
+import { QRCodeSVG } from "qrcode.react";
 
 import { auth, db } from "@/lib/firebase/clientApp";
 import showToast from "./toast";
-import Receipt from "@/utils/generatePDF";
-import savePDF from "@/utils/generatePDF";
 
 const TOAST_LIMIT = 3;
 const PAYMENT_MODES = ["Cash", "UPI"];
@@ -28,6 +27,7 @@ const INITIAL_FORM_DATA = {
 	amount: 100,
 	paymentMode: PAYMENT_MODES[0],
 };
+const UPI_ID = "8169981337@apl";
 
 export default function Form({ type, name }) {
 	const [payload, payloadSet] = useState(INITIAL_FORM_DATA);
@@ -63,7 +63,16 @@ export default function Form({ type, name }) {
 
 		try {
 			batch.set(receiptRef, payload);
-			batch.set(userRef, { name: payload.name });
+			await runTransaction(db, async (transaction) => {
+				const user = await transaction.get(userRef);
+				console.log({ user });
+				if (!user.exists()) {
+					transaction.set(userRef, {
+						name: payload.name,
+						role: "donor",
+					});
+				}
+			});
 		} catch (err) {
 			console.log({ err });
 		}
@@ -76,13 +85,13 @@ export default function Form({ type, name }) {
 		// await saveReceipt();
 
 		// show toast to user and reset form
-		// showToast("Receipt is created!");
-		// payloadSet(INITIAL_FORM_DATA);
+		showToast("Receipt is created!");
+		payloadSet(INITIAL_FORM_DATA);
 
 		// generate receipt PDF and send to user
 		const response = await fetch("/api/export", { method: "POST" });
-		const data = await response.json();
-		console.log({ data });
+		// const data = await response.json();
+		// console.log({ data });
 	};
 
 	const isNumberAdded = payload.phone.length !== 10;
@@ -177,7 +186,7 @@ export default function Form({ type, name }) {
 				<label className="text-sm">Payment mode</label>
 				<select
 					className="input"
-					value={payload.paymentMode}
+					value={PAYMENT_MODES[payload.paymentMode]}
 					onChange={(e) =>
 						payloadSet({
 							...payload,
@@ -190,6 +199,15 @@ export default function Form({ type, name }) {
 					<option value="1">UPI</option>
 				</select>
 			</div>
+			{payload.paymentMode === "UPI" ? (
+				<div className="mx-auto">
+					<QRCodeSVG
+						value={`upi://pay?pa=${UPI_ID}&pn=Siddhesh&am=${payload.amount}&cu=INR`}
+						fgColor="#211D38"
+						bgColor="#FEAF6F"
+					/>
+				</div>
+			) : null}
 			<button
 				className="input border-orange-400 bg-orange-400 hover:bg-orange-500 text-white disabled:bg-orange-400 disabled:text-white"
 				disabled={isNumberAdded}
