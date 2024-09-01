@@ -62,7 +62,12 @@ export default function Form({ type, name }) {
 		const userRef = doc(db, "users", payload.phone);
 
 		try {
-			batch.set(receiptRef, payload);
+			const receiptData = { ...payload };
+			if (payload.event === 0) {
+				receiptData.event = events[0].name;
+			}
+
+			batch.set(receiptRef, receiptData);
 			await runTransaction(db, async (transaction) => {
 				const user = await transaction.get(userRef);
 				console.log({ user });
@@ -82,7 +87,7 @@ export default function Form({ type, name }) {
 
 	const createReceipt = async () => {
 		// save receipt to DB
-		// await saveReceipt();
+		await saveReceipt();
 
 		// show toast to user and reset form
 		showToast("Receipt is created!");
@@ -133,6 +138,7 @@ export default function Form({ type, name }) {
 				{events?.length ? (
 					<select
 						className="input"
+						defaultValue={events[0].name}
 						value={payload.event}
 						onChange={(e) =>
 							payloadSet({
