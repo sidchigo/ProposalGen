@@ -36,6 +36,7 @@ export default function Form({ type, name }) {
 	const [events, loading, error] = useCollectionData(
 		query(eventsRef, orderBy("name", "asc"))
 	);
+	console.log({ events, loading, error });
 	const { toasts } = useToasterStore();
 
 	// limit max number of toasts
