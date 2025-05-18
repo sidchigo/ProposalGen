@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import dayjs from "dayjs";
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { useAuthState } from "react-firebase-hooks/auth";
 import {
@@ -9,34 +8,24 @@ import {
 	query,
 	doc,
 	writeBatch,
-	runTransaction,
 } from "firebase/firestore";
 import toast, { useToasterStore } from "react-hot-toast";
-import { QRCodeSVG } from "qrcode.react";
 
 import { auth, db } from "@/lib/firebase/clientApp";
 import showToast from "./toast";
 
 const TOAST_LIMIT = 3;
-const PAYMENT_MODES = ["Cash", "UPI"];
 const INITIAL_FORM_DATA = {
-	phone: "",
-	name: "Siddhesh",
-	date: dayjs().format("YYYY-MM-DD"),
-	event: 0,
-	amount: 100,
-	paymentMode: PAYMENT_MODES[0],
+	clientName: "",
+	projectTitle: "",
+	projectDescription: "",
+	pricing: "",
+	termsConditions: "",
 };
-const UPI_ID = "8169981337@apl";
 
 export default function Form({ type, name }) {
 	const [payload, payloadSet] = useState(INITIAL_FORM_DATA);
 	const [user] = useAuthState(auth);
-	const eventsRef = query(collection(db, "events"));
-	const [events, loading, error] = useCollectionData(
-		query(eventsRef, orderBy("name", "asc"))
-	);
-	console.log({ events, loading, error });
 	const { toasts } = useToasterStore();
 
 	// limit max number of toasts
@@ -47,60 +36,33 @@ export default function Form({ type, name }) {
 			.forEach((t) => toast.dismiss(t.id)); // Dismiss – Use toast.remove(t.id) removal without animation
 	}, [toasts]);
 
-	const handlePhone = (e) => {
-		const numberRegex = /^\d+$/;
-		if (
-			e.currentTarget.value === "" ||
-			numberRegex.test(e.currentTarget.value)
-		) {
-			payloadSet({ ...payload, phone: e.currentTarget.value });
-		}
-	};
-
-	const saveReceipt = async () => {
+	const saveProposal = async () => {
 		const batch = writeBatch(db);
-		const receiptRef = doc(collection(db, "receipts"));
-		const userRef = doc(db, "users", payload.phone);
-
+		const proposalRef = doc(collection(db, "proposals"));
+		console.log({ proposalRef });
 		try {
-			const receiptData = { ...payload };
-			if (payload.event === 0) {
-				receiptData.event = events[0].name;
-			}
-
-			batch.set(receiptRef, receiptData);
-			await runTransaction(db, async (transaction) => {
-				const user = await transaction.get(userRef);
-				console.log({ user });
-				if (!user.exists()) {
-					transaction.set(userRef, {
-						name: payload.name,
-						role: "donor",
-					});
-				}
-			});
+			batch.set(proposalRef, payload);
 		} catch (err) {
 			console.log({ err });
+			showToast("Something went wrong!", "error");
 		}
 
 		await batch.commit();
 	};
 
-	const createReceipt = async () => {
-		// save receipt to DB
-		await saveReceipt();
+	const createProposal = async () => {
+		// save proposal to DB
+		await saveProposal();
 
 		// show toast to user and reset form
-		showToast("Receipt is created!");
+		showToast("Proposal is created!");
 		payloadSet(INITIAL_FORM_DATA);
 
-		// generate receipt PDF and send to user
-		const response = await fetch("/api/export", { method: "POST" });
+		// generate proposal PDF and send to user
+		// const response = await fetch("/api/export", { method: "POST" });
 		// const data = await response.json();
 		// console.log({ data });
 	};
-
-	const isNumberAdded = payload.phone.length !== 10;
 
 	return (
 		<section className="grid row-auto gap-5">
@@ -108,119 +70,89 @@ export default function Form({ type, name }) {
 				{type} {name}
 			</h1>
 			<div>
-				<label className="text-sm">Phone Number</label>
-				<input
-					type="tel"
-					placeholder="Enter phone"
-					name="donor"
-					className="input"
-					value={payload.phone}
-					minLength={10}
-					maxLength={10}
-					onChange={(e) => handlePhone(e)}
-				/>
-			</div>
-			<div>
-				<label className="text-sm">Name</label>
+				<label className="text-sm">Client Name</label>
 				<input
 					type="text"
-					placeholder="Enter name"
-					name="donor"
+					placeholder="Enter client's name"
+					name="clientName"
 					className="input"
-					value={payload.name}
+					value={payload.clientName}
 					onChange={(e) =>
-						payloadSet({ ...payload, name: e.currentTarget.value })
+						payloadSet({
+							...payload,
+							clientName: e.currentTarget.value,
+						})
 					}
-					disabled={isNumberAdded}
 				/>
 			</div>
 			<div>
-				<label className="text-sm">Event Name</label>
-				{events?.length ? (
-					<select
-						className="input"
-						defaultValue={events[0].name}
-						value={payload.event}
-						onChange={(e) =>
-							payloadSet({
-								...payload,
-								event: e.currentTarget.value,
-							})
-						}
-						disabled={isNumberAdded}
-					>
-						{events.map((event, index) => (
-							<option key={index} value={event.name}>
-								{event.name}
-							</option>
-						))}
-					</select>
-				) : null}
-			</div>
-			<div>
-				<label className="text-sm">Event Date</label>
+				<label className="text-sm">Project Title</label>
 				<input
-					type="date"
-					name="date"
-					placeholder="Enter date"
+					type="text"
+					placeholder="Enter project title"
+					name="projectTitle"
 					className="input"
-					value={payload.date}
+					value={payload.projectTitle}
 					onChange={(e) =>
-						payloadSet({ ...payload, date: e.currentTarget.value })
+						payloadSet({
+							...payload,
+							projectTitle: e.currentTarget.value,
+						})
 					}
-					disabled={isNumberAdded}
 				/>
 			</div>
 			<div>
-				<label className="text-sm">Donation Amount</label>
+				<label className="text-sm">Project Description</label>
+				<textarea
+					placeholder="Enter project description"
+					name="projectDescription"
+					value={payload.projectDescription}
+					className="input"
+					onChange={(e) =>
+						payloadSet({
+							...payload,
+							projectDescription: e.currentTarget.value,
+						})
+					}
+				/>
+			</div>
+			<div>
+				<label className="text-sm">Pricing details</label>
 				<input
 					type="number"
-					name="amount"
-					placeholder="Enter amount"
+					name="pricing"
+					placeholder="Enter pricing details"
 					min={0}
 					className="input"
-					value={payload.amount}
+					value={payload.pricing}
 					onChange={(e) =>
 						payloadSet({
 							...payload,
-							amount: e.currentTarget.value,
+							pricing: e.currentTarget.value,
 						})
 					}
-					disabled={isNumberAdded}
 				/>
 			</div>
 			<div>
-				<label className="text-sm">Payment mode</label>
-				<select
+				<label className="text-sm">Terms & Conditions</label>
+				<textarea
+					placeholder="Enter terms & conditions"
+					name="termsConditions"
+					value={payload.termsConditions}
 					className="input"
-					value={PAYMENT_MODES[payload.paymentMode]}
 					onChange={(e) =>
 						payloadSet({
 							...payload,
-							paymentMode: PAYMENT_MODES[e.currentTarget.value],
+							termsConditions: e.currentTarget.value,
 						})
 					}
-					disabled={isNumberAdded}
-				>
-					<option value="0">Cash</option>
-					<option value="1">UPI</option>
-				</select>
+				/>
 			</div>
-			{payload.paymentMode === "UPI" ? (
-				<div className="mx-auto">
-					<QRCodeSVG
-						value={`upi://pay?pa=${UPI_ID}&pn=Siddhesh&am=${payload.amount}&cu=INR`}
-						fgColor="#211D38"
-						bgColor="#FEAF6F"
-					/>
-				</div>
-			) : null}
 			<button
 				className="input border-orange-400 bg-orange-400 hover:bg-orange-500 text-white disabled:bg-orange-400 disabled:text-white"
-				disabled={isNumberAdded}
-				onClick={() => createReceipt()}
+				onClick={() => createProposal()}
 			>
-				Create
+				Submit Proposal
 			</button>
 		</section>
 	);

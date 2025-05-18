@@ -1,14 +1,14 @@
 env:
     # Get these values from the Firebase console
     - variable: NEXT_PUBLIC_FIREBASE_API_KEY
-      value: "AIzaSyCQGYNLvxxVi4axAv1NKZU-DCkBj45-W1c"
+      value: "AIzaSyDCq32D5XwWnkfmUuCzwVxhjddWdWwgGBM"
     - variable: NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN
-      value: "project-receipt-gen.firebaseapp.com"
+      value: "project-proposal-gen.firebaseapp.com"
     - variable: NEXT_PUBLIC_FIREBASE_PROJECT_ID
-      value: "project-receipt-gen"
+      value: "project-proposal-gen"
     - variable: NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET
-      value: "project-receipt-gen.appspot.com"
+      value: "project-proposal-gen.firebasestorage.app"
     - variable: NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID
-      value: "673224171081"
+      value: "447894764468"
     - variable: NEXT_PUBLIC_FIREBASE_APP_ID
-      value: "1:673224171081:web:1b8282ccfdeeb8b3e4a998"
+      value: "1:447894764468:web:c0fc85b232b3492cb290e1"

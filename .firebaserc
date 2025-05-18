@@ -1,5 +1,5 @@
 {
-  "projects": {
-    "default": "project-receipt-gen"
-  }
+	"projects": {
+		"default": "project-proposal-gen"
+	}
 }
