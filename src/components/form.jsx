@@ -8,6 +8,7 @@ import {
 	query,
 	doc,
 	writeBatch,
+	Timestamp,
 } from "firebase/firestore";
 import toast, { useToasterStore } from "react-hot-toast";
 
@@ -41,7 +42,7 @@ export default function Form({ type, name }) {
 		const proposalRef = doc(collection(db, "proposals"));
 		console.log({ proposalRef });
 		try {
-			batch.set(proposalRef, payload);
+			batch.set(proposalRef, { ...payload, timestamp: Timestamp.now() });
 		} catch (err) {
 			console.log({ err });
 			showToast("Something went wrong!", "error");
