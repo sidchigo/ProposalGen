@@ -14,6 +14,7 @@ import toast, { useToasterStore } from "react-hot-toast";
 
 import { auth, db } from "@/lib/firebase/clientApp";
 import showToast from "./toast";
+import { useProposalStore } from "@/store/useProposalStore";
 
 const TOAST_LIMIT = 3;
 const INITIAL_FORM_DATA = {
@@ -28,6 +29,7 @@ export default function Form({ type, name }) {
 	const [payload, payloadSet] = useState(INITIAL_FORM_DATA);
 	const [user] = useAuthState(auth);
 	const { toasts } = useToasterStore();
+	const addProposal = useProposalStore((state) => state.addProposal);
 
 	// limit max number of toasts
 	useEffect(() => {
@@ -57,7 +59,8 @@ export default function Form({ type, name }) {
 
 		// show toast to user and reset form
 		showToast("Proposal is created!");
-		payloadSet(INITIAL_FORM_DATA);
+		addProposal(payload);
+		// payloadSet(INITIAL_FORM_DATA);
 
 		// generate proposal PDF and send to user
 		// const response = await fetch("/api/export", { method: "POST" });
