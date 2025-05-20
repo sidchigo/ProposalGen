@@ -16,7 +16,6 @@ const props = {
 
 export default function Home() {
 	const proposal = useProposalStore((state) => state.proposal);
-	console.log({ proposal: JSON.stringify(proposal) });
 	const {
 		clientName,
 		projectTitle,

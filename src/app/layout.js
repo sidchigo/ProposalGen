@@ -5,8 +5,8 @@ import "@/styles/globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-	title: "Receipt Gen",
-	description: "Generated receipts",
+	title: "Proposal Gen",
+	description: "Generated proposals for your clients",
 };
 
 export default function RootLayout({ children }) {

@@ -8,16 +8,19 @@ export const createProposalSlice = (set) => ({
 		timeline: "",
 		scope: "",
 	},
-	addProposal: () =>
-		set((state) => ({
-			clientName: state.clientName,
-			projectTitle: state.projectTitle,
-			projectDescription: state.projectDescription,
-			pricing: state.pricing,
-			termsConditions: state.termsConditions,
-			timeline: state.timeline,
-			scope: state.scope,
-		})),
+	addProposal: (payload) => {
+		set(() => ({
+			proposal: {
+				clientName: payload.clientName,
+				projectTitle: payload.projectTitle,
+				projectDescription: payload.projectDescription,
+				pricing: payload.pricing,
+				termsConditions: payload.termsConditions,
+				timeline: payload.timeline,
+				scope: payload.scope,
+			},
+		}));
+	},
 	updateProposal: (payload) =>
 		set((state) => ({
 			proposal: {

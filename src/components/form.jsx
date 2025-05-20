@@ -60,7 +60,6 @@ export default function Form({ type, name }) {
 		// show toast to user and reset form
 		showToast("Proposal is created!");
 		addProposal(payload);
-		// payloadSet(INITIAL_FORM_DATA);
 
 		// generate proposal PDF and send to user
 		// const response = await fetch("/api/export", { method: "POST" });
@@ -157,6 +156,18 @@ export default function Form({ type, name }) {
 				onClick={() => createProposal()}
 			>
 				Submit Proposal
+			</button>
+			<button
+				className="input border-blue-400 bg-blue-400 hover:bg-blue-500 text-white disabled:bg-blue-400 disabled:text-white"
+				onClick={() => createProposal()}
+			>
+				Export as PDF
+			</button>
+			<button
+				className="input border-orange-400 bg-white hover:bg-orange-300 hover:text-white text-orange-500 disabled:bg-orange-400 disabled:text-white"
+				onClick={() => payloadSet(INITIAL_FORM_DATA)}
+			>
+				Reset
 			</button>
 		</section>
 	);
