@@ -26,7 +26,7 @@ export default function Home() {
 		termsConditions,
 	} = proposal;
 	return (
-		<div className="grid grid-cols-6 gap-5">
+		<div className="grid grid-cols-6 gap-5 my-8">
 			<div className="col-span-1 px-4">
 				<Form type="Create" name="Proposal" />
 			</div>

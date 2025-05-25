@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 .app {
-	@apply relative z-10 flex justify-center items-center flex-col mx-auto sm:px-12 px-4 h-dvh;
+	@apply relative z-10 flex justify-center items-center flex-col mx-auto sm:px-12 px-4 h-full;
 }
 
 .input {

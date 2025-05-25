@@ -1,20 +1,22 @@
 "use client";
 import { useState, useEffect } from "react";
-import { useCollectionData } from "react-firebase-hooks/firestore";
+import dynamic from "next/dynamic";
 import { useAuthState } from "react-firebase-hooks/auth";
-import {
-	collection,
-	orderBy,
-	query,
-	doc,
-	writeBatch,
-	Timestamp,
-} from "firebase/firestore";
+import { collection, doc, writeBatch, Timestamp } from "firebase/firestore";
 import toast, { useToasterStore } from "react-hot-toast";
 
 import { auth, db } from "@/lib/firebase/clientApp";
 import showToast from "./toast";
 import { useProposalStore } from "@/store/useProposalStore";
+import ProposalPDF from "./proposalPDF";
+
+const PDFDownloadLink = dynamic(
+	() => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
+	{
+		ssr: false,
+		loading: () => <p>Loading download link...</p>,
+	}
+);
 
 const TOAST_LIMIT = 3;
 const INITIAL_FORM_DATA = {
@@ -23,6 +25,8 @@ const INITIAL_FORM_DATA = {
 	projectDescription: "",
 	pricing: "",
 	termsConditions: "",
+	timeline: "",
+	scope: "",
 };
 
 export default function Form({ type, name }) {
@@ -105,6 +109,37 @@ export default function Form({ type, name }) {
 				/>
 			</div>
 			<div>
+				<label className="text-sm">Project Scope</label>
+				<input
+					type="text"
+					placeholder="Enter project scope"
+					name="scope"
+					className="input"
+					value={payload.scope}
+					onChange={(e) =>
+						payloadSet({
+							...payload,
+							scope: e.currentTarget.value,
+						})
+					}
+				/>
+			</div>
+			<div>
+				<label className="text-sm">Project Timeline</label>
+				<textarea
+					placeholder="Enter project timeline"
+					name="timeline"
+					value={payload.timeline}
+					className="input"
+					onChange={(e) =>
+						payloadSet({
+							...payload,
+							timeline: e.currentTarget.value,
+						})
+					}
+				/>
+			</div>
+			<div>
 				<label className="text-sm">Project Description</label>
 				<textarea
 					placeholder="Enter project description"
@@ -122,7 +157,7 @@ export default function Form({ type, name }) {
 			<div>
 				<label className="text-sm">Pricing details</label>
 				<input
-					type="number"
+					type="text"
 					name="pricing"
 					placeholder="Enter pricing details"
 					min={0}
@@ -157,12 +192,20 @@ export default function Form({ type, name }) {
 			>
 				Submit Proposal
 			</button>
-			<button
-				className="input border-blue-400 bg-blue-400 hover:bg-blue-500 text-white disabled:bg-blue-400 disabled:text-white"
-				onClick={() => createProposal()}
+			{/* <PDFDownloadLink
+				document={<ProposalPDF {...payload} />}
+				fileName="Proposal.pdf"
+				style={{
+					padding: "8px 16px",
+					backgroundColor: "#3b82f6",
+					color: "#ffffff",
+					borderRadius: "4px",
+					textDecoration: "none",
+					textAlign: "center",
+				}}
 			>
-				Export as PDF
-			</button>
+				{({ loading }) => (loading ? "Preparing..." : "Export as PDF")}
+			</PDFDownloadLink> */}
 			<button
 				className="input border-orange-400 bg-white hover:bg-orange-300 hover:text-white text-orange-500 disabled:bg-orange-400 disabled:text-white"
 				onClick={() => payloadSet(INITIAL_FORM_DATA)}

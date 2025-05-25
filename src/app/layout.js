@@ -13,7 +13,7 @@ export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
 			<body className={inter.className}>
-				<main className="app">{children}</main>
+				<main className="app bg-beige">{children}</main>
 				<Toaster position="bottom-center" />
 			</body>
 		</html>

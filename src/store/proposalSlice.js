@@ -7,6 +7,7 @@ export const createProposalSlice = (set) => ({
 		termsConditions: "",
 		timeline: "",
 		scope: "",
+		isSubmitted: false,
 	},
 	addProposal: (payload) => {
 		set(() => ({
@@ -18,6 +19,7 @@ export const createProposalSlice = (set) => ({
 				termsConditions: payload.termsConditions,
 				timeline: payload.timeline,
 				scope: payload.scope,
+				isSubmitted: true,
 			},
 		}));
 	},
