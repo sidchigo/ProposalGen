@@ -14,13 +14,13 @@ const BlobProvider = dynamic(
 export default function Template({ isSubmitted, ...props }) {
 	if (!isSubmitted) {
 		return (
-			<div className="w-full h-full p-4 flex justify-center items-center bg-white border border-gray-200 rounded-lg shadow-sm">
+			<div className="w-full h-full p-4 flex justify-center items-center bg-beige dark:bg-beige dark:text-brown border border-gray-200 rounded-lg shadow-sm">
 				Please submit proposal to view PDF preview
 			</div>
 		);
 	}
 	return (
-		<div className="w-full h-full p-4 bg-white border border-gray-200 rounded-lg shadow-sm">
+		<div className="w-full h-full p-4 bg-beige dark:bg-beige dark:text-brown border border-gray-200 rounded-lg shadow-sm">
 			<BlobProvider document={<ProposalPDF {...props} />}>
 				{({ url, loading, error }) => {
 					console.log({ url, loading, error });

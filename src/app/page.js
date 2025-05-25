@@ -24,6 +24,7 @@ export default function Home() {
 		scope,
 		pricing,
 		termsConditions,
+		isSubmitted,
 	} = proposal;
 	return (
 		<div className="grid grid-cols-6 gap-5 my-8">
@@ -40,6 +41,7 @@ export default function Home() {
 					scope={scope}
 					pricing={pricing}
 					termsConditions={termsConditions}
+					isSubmitted={isSubmitted}
 				/>
 			</div>
 		</div>

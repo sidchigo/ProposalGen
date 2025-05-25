@@ -1,14 +1,21 @@
-@tailwind base;
-@tailwind components;
-@tailwind utilities;
+@import "tailwindcss";
 
-.app {
-	@apply relative z-10 flex justify-center items-center flex-col mx-auto sm:px-12 px-4 h-full;
+@config '../../tailwind.config.js';
+
+@theme {
+	--color-beige: #fdf1dc;
+	--color-brown: #24211b;
 }
 
-.input {
-	@apply border text-sm block w-full rounded-md p-3 hover:border-orange-200 focus:ring-orange-200 focus:border-orange-200;
-	@apply disabled:bg-slate-200 disabled:text-slate-400 disabled:border-opacity-0 disabled:opacity-70;
+@layer utilities {
+	.app {
+		@apply relative z-10 flex justify-center items-center flex-col mx-auto sm:px-12 px-4 h-full bg-beige dark:bg-brown dark:text-white min-h-screen;
+	}
+
+	.input {
+		@apply border text-sm block w-full rounded-md p-3 hover:border-orange-200 focus:ring-orange-200 focus:border-orange-200;
+		@apply disabled:bg-slate-200 disabled:text-slate-400 disabled:border-black/0 disabled:opacity-70;
+	}
 }
 
 @layer base {
