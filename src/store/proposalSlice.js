@@ -8,6 +8,9 @@ export const createProposalSlice = (set) => ({
 		timeline: "",
 		scope: "",
 		isSubmitted: false,
+		commanyName: "",
+		companyEmail: "",
+		website: "",
 	},
 	addProposal: (payload) => {
 		set(() => ({
@@ -20,6 +23,9 @@ export const createProposalSlice = (set) => ({
 				timeline: payload.timeline,
 				scope: payload.scope,
 				isSubmitted: true,
+				companyName: payload.companyName,
+				companyEmail: payload.companyEmail,
+				website: payload.website,
 			},
 		}));
 	},

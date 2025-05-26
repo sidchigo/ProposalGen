@@ -1,6 +1,6 @@
 "use client";
 import Form from "@/components/form";
-import Template from "@/components/template";
+import Template from "@/components/Template/template";
 import { useProposalStore } from "@/store/useProposalStore";
 
 const props = {
@@ -24,8 +24,12 @@ export default function Home() {
 		scope,
 		pricing,
 		termsConditions,
+		companyName,
+		companyEmail,
+		website,
 		isSubmitted,
 	} = proposal;
+	console.log({ showCompanyEmail: companyName || companyEmail });
 	return (
 		<div className="grid grid-cols-6 gap-5 my-8">
 			<div className="col-span-1 px-4">
@@ -41,6 +45,9 @@ export default function Home() {
 					scope={scope}
 					pricing={pricing}
 					termsConditions={termsConditions}
+					companyName={companyName}
+					companyEmail={companyEmail}
+					website={website}
 					isSubmitted={isSubmitted}
 				/>
 			</div>

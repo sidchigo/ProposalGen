@@ -27,10 +27,14 @@ const INITIAL_FORM_DATA = {
 	termsConditions: "",
 	timeline: "",
 	scope: "",
+	companyName: "",
+	companyEmail: "",
+	website: "",
 };
 
 export default function Form({ type, name }) {
 	const [payload, payloadSet] = useState(INITIAL_FORM_DATA);
+	const [accordian, setAccordian] = useState(false);
 	const [user] = useAuthState(auth);
 	const { toasts } = useToasterStore();
 	const addProposal = useProposalStore((state) => state.addProposal);
@@ -46,7 +50,7 @@ export default function Form({ type, name }) {
 	const saveProposal = async () => {
 		const batch = writeBatch(db);
 		const proposalRef = doc(collection(db, "proposals"));
-		console.log({ proposalRef });
+
 		try {
 			batch.set(proposalRef, { ...payload, timestamp: Timestamp.now() });
 		} catch (err) {
@@ -59,17 +63,14 @@ export default function Form({ type, name }) {
 
 	const createProposal = async () => {
 		// save proposal to DB
-		await saveProposal();
+		// await saveProposal();
 
 		// show toast to user and reset form
 		showToast("Proposal is created!");
 		addProposal(payload);
-
-		// generate proposal PDF and send to user
-		// const response = await fetch("/api/export", { method: "POST" });
-		// const data = await response.json();
-		// console.log({ data });
 	};
+
+	console.log({ accordian });
 
 	return (
 		<section className="grid row-auto gap-5">
@@ -186,26 +187,104 @@ export default function Form({ type, name }) {
 					}
 				/>
 			</div>
+			<div>
+				<button
+					onClick={() => setAccordian(!accordian)}
+					class="w-full flex justify-between items-center cursor-pointer"
+				>
+					<span>Your Branding</span>
+					<span id="icon-1" class="transition-transform duration-300">
+						{accordian ? (
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 16 16"
+								fill="currentColor"
+								className="w-4 h-4"
+							>
+								<path
+									fillRule="evenodd"
+									d="M11.78 9.78a.75.75 0 0 1-1.06 0L8 7.06 5.28 9.78a.75.75 0 0 1-1.06-1.06l3.25-3.25a.75.75 0 0 1 1.06 0l3.25 3.25a.75.75 0 0 1 0 1.06Z"
+									clipRule="evenodd"
+								/>
+							</svg>
+						) : (
+							<svg
+								xmlns="http://www.w3.org/2000/svg"
+								viewBox="0 0 16 16"
+								fill="currentColor"
+								className="w-4 h-4"
+							>
+								<path
+									fillRule="evenodd"
+									d="M4.22 6.22a.75.75 0 0 1 1.06 0L8 8.94l2.72-2.72a.75.75 0 1 1 1.06 1.06l-3.25 3.25a.75.75 0 0 1-1.06 0L4.22 7.28a.75.75 0 0 1 0-1.06Z"
+									clipRule="evenodd"
+								/>
+							</svg>
+						)}
+					</span>
+				</button>
+				<div
+					className={`${
+						accordian ? "max-h-fit" : "max-h-0"
+					} grid row-auto gap-5 overflow-hidden transition-all duration-300 ease-in-out`}
+				>
+					<div className="pt-5">
+						<label className="text-sm">Your/Company Name</label>
+						<input
+							type="text"
+							placeholder="Enter company name"
+							name="companyName"
+							className="input"
+							value={payload.companyName}
+							onChange={(e) =>
+								payloadSet({
+									...payload,
+									companyName: e.currentTarget.value,
+								})
+							}
+						/>
+					</div>
+					<div>
+						<label className="text-sm">Email</label>
+						<input
+							type="text"
+							placeholder="Enter email"
+							name="companyEmail"
+							className="input"
+							value={payload.companyEmail}
+							onChange={(e) =>
+								payloadSet({
+									...payload,
+									companyEmail: e.currentTarget.value,
+								})
+							}
+						/>
+					</div>
+					<div>
+						<label className="text-sm">Website</label>
+						<input
+							type="text"
+							placeholder="Enter website"
+							name="website"
+							className="input"
+							value={payload.website}
+							onChange={(e) =>
+								payloadSet({
+									...payload,
+									website: e.currentTarget.value,
+								})
+							}
+						/>
+					</div>
+				</div>
+			</div>
+
 			<button
 				className="input border-orange-400 bg-orange-400 hover:bg-orange-500 text-white disabled:bg-orange-400 disabled:text-white"
 				onClick={() => createProposal()}
 			>
 				Submit Proposal
 			</button>
-			{/* <PDFDownloadLink
-				document={<ProposalPDF {...payload} />}
-				fileName="Proposal.pdf"
-				style={{
-					padding: "8px 16px",
-					backgroundColor: "#3b82f6",
-					color: "#ffffff",
-					borderRadius: "4px",
-					textDecoration: "none",
-					textAlign: "center",
-				}}
-			>
-				{({ loading }) => (loading ? "Preparing..." : "Export as PDF")}
-			</PDFDownloadLink> */}
 			<button
 				className="input border-orange-400 bg-white hover:bg-orange-300 hover:text-white text-orange-500 disabled:bg-orange-400 disabled:text-white"
 				onClick={() => payloadSet(INITIAL_FORM_DATA)}

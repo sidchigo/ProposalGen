@@ -19,63 +19,7 @@ Font.register({
 	],
 });
 
-// Styles
-const styles = StyleSheet.create({
-	page: {
-		// fontFamily: "Inter",
-		fontSize: 12,
-		padding: 30,
-		lineHeight: 1.6,
-		color: "#000",
-	},
-	section: {
-		marginBottom: 20,
-	},
-	heading: {
-		fontSize: 22,
-		fontWeight: "bold",
-		marginBottom: 10,
-	},
-	label: {
-		fontSize: 10,
-		color: "#888",
-		textTransform: "uppercase",
-		marginBottom: 3,
-	},
-	value: {
-		fontSize: 12,
-		marginBottom: 5,
-	},
-	row: {
-		flexDirection: "row",
-		justifyContent: "space-between",
-	},
-	divider: {
-		height: 1,
-		backgroundColor: "#ddd",
-		marginVertical: 10,
-	},
-	cost: {
-		color: "#d32f2f",
-		fontWeight: "bold",
-		fontSize: 12,
-	},
-	listItem: {
-		marginBottom: 5,
-	},
-	footer: {
-		position: "absolute",
-		bottom: 30,
-		left: 30,
-		right: 30,
-		fontSize: 10,
-		color: "#888",
-		flexDirection: "row",
-		justifyContent: "space-between",
-	},
-});
-
-const ProposalPDF = (props) => {
+const ProposalPDF = ({ styles, ...props }) => {
 	const {
 		clientName,
 		projectTitle,
@@ -84,30 +28,32 @@ const ProposalPDF = (props) => {
 		scope,
 		pricing,
 		termsConditions,
+		companyName,
+		companyEmail,
+		website,
 	} = props;
+	console.log({ showCompanyEmail: companyName || companyEmail });
 
 	return (
-		<Document>
-			<Page size="A4" style={styles.page}>
+		<Document pageMode="fullScreen" title={projectTitle}>
+			<Page wrap size="A4" style={styles.page}>
 				{/* Header */}
 				<View style={styles.section}>
 					<Text style={styles.heading}>{projectTitle}</Text>
 					<View style={styles.row}>
-						<View>
-							<Text style={styles.label}>Prepared For:</Text>
+						<View style={styles.column}>
+							<Text style={styles.label}>Prepared For</Text>
 							<Text style={styles.value}>{clientName}</Text>
 						</View>
-						<View>
-							<Text style={styles.label}>From</Text>
-							<Text style={styles.value}>Siddhesh Naik</Text>
-							<Text style={styles.value}>
-								sid.naik26@mail.com
-							</Text>
-						</View>
-						{/* <Image
-						src="https://tanakastudio.com/logo.png" // Replace with actual logo path
-						style={{ width: 40, height: 40 }}
-					/> */}
+						{(companyName || companyEmail) && (
+							<View style={styles.column}>
+								<Text style={styles.label}>From</Text>
+								<Text style={styles.value}>{companyName}</Text>
+								<Text style={styles.value}>
+									{companyEmail || ""}
+								</Text>
+							</View>
+						)}
 					</View>
 				</View>
 
@@ -148,7 +94,7 @@ const ProposalPDF = (props) => {
 					<Text>
 						Proposal Created On: {dayjs().format("DD/MM/YYYY")}
 					</Text>
-					<Text>proposalgen.vercel.app</Text>
+					<Text>{website}</Text>
 				</View>
 			</Page>
 		</Document>
