@@ -190,10 +190,13 @@ export default function Form({ type, name }) {
 			<div>
 				<button
 					onClick={() => setAccordian(!accordian)}
-					class="w-full flex justify-between items-center cursor-pointer"
+					className="w-full flex justify-between items-center cursor-pointer"
 				>
 					<span>Your Branding</span>
-					<span id="icon-1" class="transition-transform duration-300">
+					<span
+						id="icon-1"
+						className="transition-transform duration-300"
+					>
 						{accordian ? (
 							<svg
 								xmlns="http://www.w3.org/2000/svg"

@@ -5,7 +5,10 @@ import Image from "next/image";
 import { basicTemplateStyles } from "@/components/Template/basicTemplate.styles";
 import { modernTemplateStyles } from "./modernTemplate.styles";
 import { useState } from "react";
-import { elegantTemplateStyles } from "./elegantTemplate.styles";
+import {
+	boldYellowStyles,
+	elegantTemplateStyles,
+} from "./elegantTemplate.styles";
 
 const BlobProvider = dynamic(
 	() => import("@react-pdf/renderer").then((mod) => mod.BlobProvider),
@@ -56,7 +59,7 @@ export default function Template({ isSubmitted, ...props }) {
 						height={"450"}
 					/>
 				</button>
-				<button onClick={() => setStyles(elegantTemplateStyles)}>
+				<button onClick={() => setStyles(boldYellowStyles)}>
 					<Image
 						src={"/template3.png"}
 						width={"300"}

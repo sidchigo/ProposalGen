@@ -1,23 +1,5 @@
-import {
-	Document,
-	Page,
-	Text,
-	View,
-	StyleSheet,
-	Font,
-	Image,
-} from "@react-pdf/renderer";
+import { Document, Page, Text, View } from "@react-pdf/renderer";
 import dayjs from "dayjs";
-
-// Optional: Register fonts
-Font.register({
-	family: "Inter",
-	fonts: [
-		{
-			src: "/fonts/InterRegular.ttf", // Replace with actual font path
-		}, // Normal
-	],
-});
 
 const ProposalPDF = ({ styles, ...props }) => {
 	const {
@@ -90,7 +72,7 @@ const ProposalPDF = ({ styles, ...props }) => {
 				</View>
 
 				{/* Footer */}
-				<View style={styles.footer}>
+				<View fixed style={styles.footer}>
 					<Text>
 						Proposal Created On: {dayjs().format("DD/MM/YYYY")}
 					</Text>

@@ -6,26 +6,26 @@ export const modernTemplateStyles = StyleSheet.create({
 		padding: 40,
 		lineHeight: 1.6,
 		color: "#2D2D2D",
-		backgroundColor: "#F8F6F3",
-		fontFamily: "Helvetica", // Or your registered font
+		backgroundColor: "#FFFDF9",
+		// fontFamily: "Helvetica",
+	},
+
+	heading: {
+		fontSize: 26,
+		fontWeight: "bold",
+		color: "#1A1A1A",
+		marginBottom: 20,
+		textTransform: "uppercase",
+		letterSpacing: 1.2,
 	},
 
 	section: {
 		marginBottom: 25,
 	},
 
-	heading: {
-		fontSize: 26,
-		fontWeight: "bold",
-		color: "#1B1B1B",
-		marginBottom: 20,
-		textTransform: "uppercase",
-		letterSpacing: 1.2,
-	},
-
 	label: {
 		fontSize: 10,
-		color: "#999",
+		color: "#A58F6F",
 		textTransform: "uppercase",
 		marginBottom: 4,
 		fontWeight: 500,
@@ -47,12 +47,12 @@ export const modernTemplateStyles = StyleSheet.create({
 
 	divider: {
 		height: 1,
-		backgroundColor: "#E0DDD6",
+		backgroundColor: "#E4DCCC",
 		marginVertical: 20,
 	},
 
 	cost: {
-		color: "#4E3F28",
+		color: "#946E3C",
 		fontSize: 14,
 		fontWeight: "bold",
 	},

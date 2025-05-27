@@ -1,18 +1,104 @@
-import { StyleSheet } from "@react-pdf/renderer";
+import { StyleSheet, Font } from "@react-pdf/renderer";
+
+// Font.register({
+// 	family: "Inter",
+// 	fonts: [
+// 		{
+// 			src: "/fonts/InterSemiBold.ttf", // Replace with actual font path
+// 		}, // Normal
+// 	],
+// });
+
+export const boldYellowStyles = StyleSheet.create({
+	page: {
+		fontSize: 11,
+		padding: 40,
+		lineHeight: 1.6,
+		color: "#111111",
+		backgroundColor: "#FFFFFF",
+		// fontFamily: "Helvetica",
+	},
+
+	heading: {
+		fontSize: 26,
+		fontWeight: "bold",
+		color: "#222222",
+		marginBottom: 20,
+		textTransform: "uppercase",
+		letterSpacing: 1.2,
+	},
+
+	section: {
+		marginBottom: 25,
+	},
+
+	label: {
+		fontSize: 10,
+		color: "#F4B400",
+		textTransform: "uppercase",
+		marginBottom: 4,
+		fontWeight: 500,
+		letterSpacing: 0.5,
+	},
+
+	value: {
+		fontSize: 11,
+		color: "#1D1D1D",
+		lineHeight: 1.5,
+	},
+
+	row: {
+		flexDirection: "row",
+		justifyContent: "space-between",
+		gap: 20,
+		marginBottom: 10,
+	},
+
+	divider: {
+		height: 1,
+		backgroundColor: "#FDEFB2",
+		marginVertical: 20,
+	},
+
+	cost: {
+		color: "#F4B400",
+		fontSize: 14,
+		fontWeight: "bold",
+	},
+
+	listItem: {
+		marginBottom: 5,
+	},
+
+	footer: {
+		position: "absolute",
+		bottom: 30,
+		left: 40,
+		right: 40,
+		fontSize: 9,
+		color: "#AAA",
+		flexDirection: "row",
+		justifyContent: "space-between",
+		borderTop: "1 solid #DDD",
+		paddingTop: 8,
+	},
+});
 
 export const elegantTemplateStyles = StyleSheet.create({
 	page: {
-		padding: 0,
+		paddingTop: 10,
 		backgroundColor: "#EFEAE6",
 		fontSize: 11,
 		color: "#222",
 		lineHeight: 1.6,
-		fontFamily: "Helvetica", // replace with a display font for more impact
+		// fontFamily: "Helvetica", // replace with a display font for more impact
+		paddingBottom: 50,
+		// fontFamily: "Inter",
 	},
 
 	// Layout containers
 	section: {
-		padding: 40,
+		padding: 20,
 		backgroundColor: "#FFFFFF",
 		marginBottom: 10,
 	},
@@ -77,15 +163,17 @@ export const elegantTemplateStyles = StyleSheet.create({
 
 	footer: {
 		position: "absolute",
-		bottom: 30,
-		left: 40,
-		right: 40,
+		backgroundColor: "#32292F",
+		bottom: 0,
+		left: 0,
+		right: 0,
 		fontSize: 9,
-		color: "#999",
+		color: "#F0F7F4",
 		flexDirection: "row",
 		justifyContent: "space-between",
-		borderTop: "1 solid #DDD",
-		paddingTop: 10,
+		borderTop: "1 solid #F0F7F4",
+		padding: 20,
+		marginTop: 10,
 	},
 
 	// Optional header layout override
