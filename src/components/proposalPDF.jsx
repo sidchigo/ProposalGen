@@ -15,8 +15,6 @@ const ProposalPDF = ({ styles, ...props }) => {
 		website,
 	} = props;
 
-	console.log({ styles });
-
 	return (
 		<Document pageMode="fullScreen" title={projectTitle}>
 			<Page wrap size="A4" style={styles.page}>

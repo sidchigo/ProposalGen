@@ -1,6 +1,5 @@
 "use client";
 import { useState, useEffect } from "react";
-import dynamic from "next/dynamic";
 import { useAuthState } from "react-firebase-hooks/auth";
 import { collection, doc, writeBatch, Timestamp } from "firebase/firestore";
 import toast, { useToasterStore } from "react-hot-toast";
@@ -8,15 +7,6 @@ import toast, { useToasterStore } from "react-hot-toast";
 import { auth, db } from "@/lib/firebase/clientApp";
 import showToast from "./toast";
 import { useProposalStore } from "@/store/useProposalStore";
-import ProposalPDF from "./proposalPDF";
-
-const PDFDownloadLink = dynamic(
-	() => import("@react-pdf/renderer").then((mod) => mod.PDFDownloadLink),
-	{
-		ssr: false,
-		loading: () => <p>Loading download link...</p>,
-	}
-);
 
 const TOAST_LIMIT = 3;
 const INITIAL_FORM_DATA = {
@@ -54,7 +44,6 @@ export default function Form({ type, name }) {
 		try {
 			batch.set(proposalRef, { ...payload, timestamp: Timestamp.now() });
 		} catch (err) {
-			console.log({ err });
 			showToast("Something went wrong!", "error");
 		}
 
@@ -69,8 +58,6 @@ export default function Form({ type, name }) {
 		showToast("Proposal is created!");
 		addProposal(payload);
 	};
-
-	console.log({ accordian });
 
 	return (
 		<section className="grid row-auto gap-5">

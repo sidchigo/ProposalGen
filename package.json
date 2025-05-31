@@ -1,6 +1,6 @@
 {
-	"name": "receiptgen",
-	"version": "0.1.0",
+	"name": "proposalgen",
+	"version": "1.0.0",
 	"private": true,
 	"scripts": {
 		"dev": "next dev",
@@ -13,7 +13,6 @@
 		"@tailwindcss/postcss": "^4.1.7",
 		"dayjs": "^1.11.13",
 		"firebase": "^10.13.1",
-		"mongoose": "^8.6.0",
 		"next": "14.2.7",
 		"react": "^18",
 		"react-dom": "^18",

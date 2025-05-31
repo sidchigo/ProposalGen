@@ -29,7 +29,7 @@ export default function Home() {
 		website,
 		isSubmitted,
 	} = proposal;
-	console.log({ showCompanyEmail: companyName || companyEmail });
+
 	return (
 		<div className="grid grid-cols-6 gap-5 my-8">
 			<div className="col-span-1 px-4">

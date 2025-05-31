@@ -30,7 +30,6 @@ export default function Template({ isSubmitted, ...props }) {
 		<div className="w-full h-full p-4 flex bg-teal-950 rounded-lg shadow-sm">
 			<BlobProvider document={<ProposalPDF styles={styles} {...props} />}>
 				{({ url, loading, error }) => {
-					console.log({ url, loading, error, props });
 					if (loading) return <p>Loading PDF...</p>;
 					if (error) return <p>Error generating preview</p>;
 					return (
@@ -48,33 +47,21 @@ export default function Template({ isSubmitted, ...props }) {
 						setStyles(elegantTemplateStyles);
 					}}
 				>
-					<Image
-						src={"/template1.png"}
-						width={"300"}
-						height={"450"}
-					/>
+					<Image src={"/elegant.png"} width={"300"} height={"450"} />
 				</button>
 				<button
 					onClick={() => {
 						setStyles(modernTemplateStyles);
 					}}
 				>
-					<Image
-						src={"/template2.png"}
-						width={"300"}
-						height={"450"}
-					/>
+					<Image src={"/modern.png"} width={"300"} height={"450"} />
 				</button>
 				<button
 					onClick={() => {
 						setStyles(abstractTemplateStyles);
 					}}
 				>
-					<Image
-						src={"/template3.png"}
-						width={"300"}
-						height={"450"}
-					/>
+					<Image src={"/abstract.png"} width={"300"} height={"450"} />
 				</button>
 			</div>
 		</div>
