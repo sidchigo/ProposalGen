@@ -1,4 +1,4 @@
-import { Document, Page, Text, View, Image } from "@react-pdf/renderer";
+import { Document, Page, Text, View } from "@react-pdf/renderer";
 import dayjs from "dayjs";
 
 const ProposalPDF = ({ styles, ...props }) => {
@@ -16,7 +16,7 @@ const ProposalPDF = ({ styles, ...props }) => {
 	} = props;
 
 	return (
-		<Document pageMode="fullScreen" title={projectTitle}>
+		<Document pageMode="fullScreen" title={projectTitle ?? "Proposal"}>
 			<Page wrap size="A4" style={styles.page}>
 				{/* Header */}
 				<View style={styles.headerSection}>

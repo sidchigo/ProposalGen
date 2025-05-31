@@ -1,20 +1,11 @@
-"use client";
 import { useState } from "react";
-import dynamic from "next/dynamic";
 import Image from "next/image";
+import { BlobProvider } from "@react-pdf/renderer";
 
 import ProposalPDF from "../proposalPDF";
-import { abstractTemplateStyles } from "@/components/Template/abstractTemplate.styles";
+import { abstractTemplateStyles } from "./abstractTemplate.styles";
 import { modernTemplateStyles } from "./modernTemplate.styles";
 import { elegantTemplateStyles } from "./elegantTemplate.styles";
-
-const BlobProvider = dynamic(
-	() => import("@react-pdf/renderer").then((mod) => mod.BlobProvider),
-	{
-		ssr: false,
-		loading: () => <p>Loading preview...</p>,
-	}
-);
 
 // Main Template Component
 export default function Template({ isSubmitted, ...props }) {
@@ -27,7 +18,7 @@ export default function Template({ isSubmitted, ...props }) {
 		);
 	}
 	return (
-		<div className="w-full h-full p-4 flex bg-teal-950 rounded-lg shadow-sm">
+		<div className="w-full h-full p-4 flex flex-col lg:flex-row bg-teal-950 rounded-lg shadow-sm">
 			<BlobProvider document={<ProposalPDF styles={styles} {...props} />}>
 				{({ url, loading, error }) => {
 					if (loading) return <p>Loading PDF...</p>;
@@ -47,21 +38,36 @@ export default function Template({ isSubmitted, ...props }) {
 						setStyles(elegantTemplateStyles);
 					}}
 				>
-					<Image src={"/elegant.png"} width={"300"} height={"450"} />
+					<Image
+						src={"/elegant.png"}
+						alt="elegant"
+						width={"300"}
+						height={"450"}
+					/>
 				</button>
 				<button
 					onClick={() => {
 						setStyles(modernTemplateStyles);
 					}}
 				>
-					<Image src={"/modern.png"} width={"300"} height={"450"} />
+					<Image
+						src={"/modern.png"}
+						alt="modern"
+						width={"300"}
+						height={"450"}
+					/>
 				</button>
 				<button
 					onClick={() => {
 						setStyles(abstractTemplateStyles);
 					}}
 				>
-					<Image src={"/abstract.png"} width={"300"} height={"450"} />
+					<Image
+						src={"/abstract.png"}
+						alt="abstract"
+						width={"300"}
+						height={"450"}
+					/>
 				</button>
 			</div>
 		</div>
