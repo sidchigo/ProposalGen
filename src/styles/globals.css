@@ -3,17 +3,17 @@
 @config '../../tailwind.config.js';
 
 @theme {
-	--color-beige: #fdf1dc;
-	--color-brown: #24211b;
+	--color-brown: #000c0a;
+	--color-beige: #24211b;
 }
 
 @layer utilities {
 	.app {
-		@apply relative z-10 flex justify-center items-center flex-col mx-auto sm:px-12 px-4 h-full bg-beige dark:bg-brown dark:text-white min-h-screen;
+		@apply relative z-10 flex justify-center items-center flex-col mx-auto sm:px-12 px-4 h-full bg-beige dark:bg-brown dark:text-emerald-50 min-h-screen;
 	}
 
 	.input {
-		@apply border text-sm block w-full rounded-md p-3 hover:border-orange-200 focus:ring-orange-200 focus:border-orange-200;
+		@apply border text-sm block w-full rounded-md p-3 hover:border-teal-200 focus:ring-teal-200 focus:border-teal-200 mt-2;
 		@apply disabled:bg-slate-200 disabled:text-slate-400 disabled:border-black/0 disabled:opacity-70;
 	}
 }

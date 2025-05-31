@@ -74,7 +74,7 @@ export default function Form({ type, name }) {
 
 	return (
 		<section className="grid row-auto gap-5">
-			<h1 className="text-2xl font-bold">
+			<h1 className="text-3xl font-bold text-teal-500">
 				{type} {name}
 			</h1>
 			<div>
@@ -111,8 +111,7 @@ export default function Form({ type, name }) {
 			</div>
 			<div>
 				<label className="text-sm">Project Scope</label>
-				<input
-					type="text"
+				<textarea
 					placeholder="Enter project scope"
 					name="scope"
 					className="input"
@@ -283,13 +282,13 @@ export default function Form({ type, name }) {
 			</div>
 
 			<button
-				className="input border-orange-400 bg-orange-400 hover:bg-orange-500 text-white disabled:bg-orange-400 disabled:text-white"
+				className="input border-teal-600 bg-teal-600 hover:bg-teal-700 text-white disabled:bg-teal-600 disabled:text-white cursor-pointer"
 				onClick={() => createProposal()}
 			>
 				Submit Proposal
 			</button>
 			<button
-				className="input border-orange-400 bg-white hover:bg-orange-300 hover:text-white text-orange-500 disabled:bg-orange-400 disabled:text-white"
+				className="input border-teal-700 bg-white hover:bg-teal-200 hover:text-teal-800 text-teal-700 disabled:bg-teal-400 disabled:text-white cursor-pointer"
 				onClick={() => payloadSet(INITIAL_FORM_DATA)}
 			>
 				Reset
