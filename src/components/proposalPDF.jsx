@@ -1,7 +1,46 @@
-import { Document, Page, Text, View } from "@react-pdf/renderer";
+import { Document, Page, Text, View, Font } from "@react-pdf/renderer";
 import dayjs from "dayjs";
+import { elegantTemplateStyles } from "./Template/elegantTemplate.styles";
+import { modernTemplateStyles } from "./Template/modernTemplate.styles";
+import { abstractTemplateStyles } from "./Template/abstractTemplate.styles";
 
-const ProposalPDF = ({ styles, ...props }) => {
+const templateMap = {
+	elegant: elegantTemplateStyles,
+	modern: modernTemplateStyles,
+	abstract: abstractTemplateStyles,
+};
+
+Font.register({
+	family: "Lora",
+	fonts: [{ src: "/fonts/LoraSemiBold.ttf" }],
+});
+
+Font.register({
+	family: "NunitoSemiBold",
+	fonts: [{ src: "/fonts/NunitoSemibold.ttf" }],
+});
+
+Font.register({
+	family: "Nunito",
+	fonts: [{ src: "/fonts/NunitoRegular.ttf" }],
+});
+
+Font.register({
+	family: "Inter",
+	fonts: [{ src: "/fonts/InterSemiBold.ttf" }],
+});
+
+Font.register({
+	family: "Inter",
+	fonts: [{ src: "/fonts/InterRegular.ttf" }],
+});
+
+Font.register({
+	family: "Playfair",
+	fonts: [{ src: "/fonts/PlayfairDisplayBold.ttf" }],
+});
+
+const ProposalPDF = ({ template, ...props }) => {
 	const {
 		clientName,
 		projectTitle,
@@ -14,6 +53,7 @@ const ProposalPDF = ({ styles, ...props }) => {
 		companyEmail,
 		website,
 	} = props;
+	const styles = templateMap[template];
 
 	return (
 		<Document pageMode="fullScreen" title={projectTitle ?? "Proposal"}>

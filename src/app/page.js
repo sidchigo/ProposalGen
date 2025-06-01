@@ -32,23 +32,32 @@ export default function Home() {
 	} = proposal;
 
 	return (
-		<div className="flex flex-col w-full">
-			<div className="self-center py-2">
+		<div className="flex flex-col w-full mb-5">
+			<div className="hidden lg:block self-center py-2">
 				<Image
 					src={"/logo.png"}
 					alt="ProposalGen"
-					width={"50"}
-					height={"50"}
-					style={{ width: "auto", height: "auto" }}
+					width={"200"}
+					height={"100"}
+					className="w-auto h-auto"
+				/>
+			</div>
+			<div className="lg:hidden self-center py-2">
+				<Image
+					src={"/logo.png"}
+					alt="ProposalGen"
+					width={"80"}
+					height={"40"}
+					className="w-auto h-auto"
 				/>
 			</div>
 
-			<div className="flex flex-col gap-5 sm:grid sm:grid-cols-5 md:mb-2 lg:grid-cols-6">
-				<div className="lg:col-span-1 sm:col-span-2 px-4">
+			<div className="flex flex-col gap-5 md:grid md:grid-cols-5 md:mb-2 xl:grid-cols-6">
+				<div className="md:col-span-2 px-4 xl:col-span-1">
 					<Form type="Create" name="Proposal" />
 				</div>
 
-				<div className="lg:col-span-5 sm:col-span-3 px-4">
+				<div className="md:col-span-3 px-4 xl:col-span-5">
 					<Template
 						clientName={clientName}
 						projectTitle={projectTitle}

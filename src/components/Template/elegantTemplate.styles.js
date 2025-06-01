@@ -1,22 +1,4 @@
-import { StyleSheet, Font } from "@react-pdf/renderer";
-
-Font.register({
-	family: "Playfair",
-	fonts: [
-		{
-			src: "/fonts/PlayfairDisplayBold.ttf",
-		},
-	],
-});
-
-Font.register({
-	family: "Inter",
-	fonts: [
-		{
-			src: "/fonts/InterRegular.ttf",
-		},
-	],
-});
+import { StyleSheet } from "@react-pdf/renderer";
 
 export const elegantTemplateStyles = StyleSheet.create({
 	page: {

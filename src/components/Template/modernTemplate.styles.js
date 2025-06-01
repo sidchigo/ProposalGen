@@ -1,22 +1,4 @@
-import { StyleSheet, Font } from "@react-pdf/renderer";
-
-Font.register({
-	family: "Inter",
-	fonts: [
-		{
-			src: "/fonts/InterSemiBold.ttf", // Replace with actual font path
-		}, // Normal
-	],
-});
-
-Font.register({
-	family: "Nunito",
-	fonts: [
-		{
-			src: "/fonts/NunitoRegular.ttf", // Replace with actual font path
-		}, // Normal
-	],
-});
+import { StyleSheet } from "@react-pdf/renderer";
 
 export const modernTemplateStyles = StyleSheet.create({
 	page: {

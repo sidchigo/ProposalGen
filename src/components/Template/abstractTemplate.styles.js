@@ -1,14 +1,4 @@
-import { StyleSheet, Font } from "@react-pdf/renderer";
-
-Font.register({
-	family: "Lora",
-	fonts: [{ src: "/fonts/LoraSemiBold.ttf" }],
-});
-
-Font.register({
-	family: "Nunito",
-	fonts: [{ src: "/fonts/NunitoSemibold.ttf" }],
-});
+import { StyleSheet } from "@react-pdf/renderer";
 
 export const abstractTemplateStyles = StyleSheet.create({
 	page: {
@@ -18,7 +8,7 @@ export const abstractTemplateStyles = StyleSheet.create({
 		lineHeight: 1.7,
 		backgroundColor: "#EDEAF7", // soft lavender
 		color: "#2B2B2B",
-		fontFamily: "Nunito",
+		fontFamily: "NunitoSemiBold",
 	},
 
 	heading: {

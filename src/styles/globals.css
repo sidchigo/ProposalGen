@@ -13,7 +13,7 @@
 	}
 
 	.input {
-		@apply border text-sm block w-full rounded-md p-3 hover:border-teal-200 focus:ring-teal-200 focus:border-teal-200 mt-2;
+		@apply border text-sm w-full rounded-md p-3 hover:border-teal-200 focus:ring-teal-200 focus:border-teal-200 mt-2;
 		@apply disabled:bg-slate-200 disabled:text-slate-400 disabled:border-black/0 disabled:opacity-70;
 	}
 }
