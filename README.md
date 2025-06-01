@@ -33,25 +33,25 @@ Built with a focus on theming, automation, and pixel-perfect PDF output, Proposa
 
 ### 🧩 Web UI
 
-<img src="./screenshots/form-preview.png" alt="ProposalGen Web App Screenshot" />
+<img src="./public/screenshots/form-preview.png" alt="ProposalGen Web App Screenshot" />
 
 ---
 
 ### 🎨 Theme: Soft Abstract
 
-<img src="./screenshots/abstract.png" alt="Soft Abstract Theme" width="600" />
+<img src="./public/screenshots/abstract.png" alt="Soft Abstract Theme" width="600" />
 
 ---
 
 ### 🌙 Theme: Dark Elegant
 
-<img src="./screenshots/elegant.png" alt="Elegant Dark Theme" width="600" />
+<img src="./public/screenshots/elegant.png" alt="Elegant Dark Theme" width="600" />
 
 ---
 
 ### 💼 Theme: Modern Minimal
 
-<img src="./screenshots/modern.png" alt="Modern Theme" width="600" />
+<img src="./public/screenshots/modern.png" alt="Modern Theme" width="600" />
 
 ---
 
