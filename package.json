@@ -1,28 +1,30 @@
 {
-  "name": "receiptgen",
-  "version": "0.1.0",
-  "private": true,
-  "scripts": {
-    "dev": "next dev",
-    "build": "next build",
-    "start": "next start",
-    "lint": "next lint"
-  },
-  "dependencies": {
-    "@react-pdf/renderer": "^3.4.4",
-    "dayjs": "^1.11.13",
-    "firebase": "^10.13.1",
-    "mongoose": "^8.6.0",
-    "next": "14.2.7",
-    "react": "^18",
-    "react-dom": "^18",
-    "react-firebase-hooks": "^5.1.1",
-    "react-hot-toast": "^2.4.1"
-  },
-  "devDependencies": {
-    "eslint": "^8",
-    "eslint-config-next": "14.2.7",
-    "postcss": "^8",
-    "tailwindcss": "^3.4.1"
-  }
+	"name": "proposalgen",
+	"version": "1.0.0",
+	"private": true,
+	"scripts": {
+		"dev": "next dev",
+		"build": "next build",
+		"start": "next start",
+		"lint": "next lint"
+	},
+	"dependencies": {
+		"@react-pdf/layout": "3.12.1",
+		"@react-pdf/renderer": "3.4.4",
+		"@tailwindcss/postcss": "^4.1.7",
+		"dayjs": "^1.11.13",
+		"firebase": "^10.13.1",
+		"next": "14.2.7",
+		"react": "^18",
+		"react-dom": "^18",
+		"react-firebase-hooks": "^5.1.1",
+		"react-hot-toast": "^2.4.1",
+		"zustand": "^5.0.4"
+	},
+	"devDependencies": {
+		"eslint": "^8",
+		"eslint-config-next": "14.2.7",
+		"postcss": "^8",
+		"tailwindcss": "^4.1.7"
+	}
 }

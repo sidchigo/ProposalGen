@@ -10,7 +10,7 @@ import {
 import { useCollectionData } from "react-firebase-hooks/firestore";
 import { db } from "@/lib/firebase/clientApp";
 
-const PAGE_SIZE = 2;
+const PAGE_SIZE = 5;
 
 const useFetchData = (collectionRef, cursor, per_page) => {
 	const constraints = [orderBy("timestamp", "desc"), limit(per_page)];

@@ -5,14 +5,14 @@ import "@/styles/globals.css";
 const inter = Inter({ subsets: ["latin"] });
 
 export const metadata = {
-	title: "Receipt Gen",
-	description: "Generated receipts",
+	title: "Proposal Gen",
+	description: "Generated proposals for your clients",
 };
 
 export default function RootLayout({ children }) {
 	return (
-		<html lang="en">
-			<body className={inter.className}>
+		<html lang="en" className={inter.className}>
+			<body>
 				<main className="app">{children}</main>
 				<Toaster position="bottom-center" />
 			</body>
