@@ -110,9 +110,6 @@ ProposalGen/
 ## 🌐 Live Demo
 👉 https://proposalgen.vercel.app
 
-## 🪪 License
-MIT © [Siddhesh Naik]
-
 ## 🙏 Acknowledgements
 - [@react-pdf/renderer](https://react-pdf.org/)
 - [Google Fonts](https://fonts.google.com/)
