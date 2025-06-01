@@ -73,3 +73,47 @@ cd proposalgen
 npm install
 npm run dev
 ```
+Then visit http://localhost:3000 and start generating proposals!
+
+## 📁 Project Structure
+```
+ProposalGen/
+├── .firebase/                 # Firebase configuration files
+├── .github/
+│   └── workflows/             # GitHub Actions workflows
+├── public/                    # Static assets (images, fonts, etc.)
+├── src/                       # Source code
+│   ├── app/                   # Next.js App Router pages
+│   ├── components/            # Reusable React components
+│   ├── styles/                # Tailwind and custom styles
+│   └── utils/                 # Utility functions and helpers
+├── .env                       # Environment variables
+├── .eslintrc.json             # ESLint configuration
+├── .firebaserc                # Firebase project settings
+├── .gitignore                 # Git ignored files
+├── README.md                  # Project documentation
+├── abstract.pdf               # Sample abstract template PDF
+├── elegant.pdf                # Sample elegant template PDF
+├── modern.pdf                 # Sample modern template PDF
+├── apphosting.yaml            # Firebase Hosting configuration
+├── firebase.json              # Firebase configuration
+├── firestore.indexes.json     # Firestore indexes
+├── firestore.rules            # Firestore security rules
+├── jsconfig.json              # JavaScript configuration
+├── next.config.mjs            # Next.js configuration
+├── package-lock.json          # Dependency lock file
+├── package.json               # Project metadata and scripts
+├── postcss.config.mjs         # PostCSS configuration
+└── tailwind.config.js         # Tailwind CSS configuration
+```
+
+## 🌐 Live Demo
+👉 https://proposalgen.vercel.app
+
+## 🪪 License
+MIT © [Siddhesh Naik]
+
+## 🙏 Acknowledgements
+- [@react-pdf/renderer](https://react-pdf.org/)
+- [Google Fonts](https://fonts.google.com/)
+- [TailwindCSS](https://tailwindcss.com/)
