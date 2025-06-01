@@ -1,5 +1,5 @@
 <p align="center">
-  <img src="./public/logosplash.png" alt="ProposalGen Logo" width="180" />
+  <img src="./public/banner.png" alt="ProposalGen Logo" />
 </p>
 
 # 📑 ProposalGen
