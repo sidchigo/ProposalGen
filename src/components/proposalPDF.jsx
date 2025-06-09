@@ -56,7 +56,11 @@ const ProposalPDF = ({ template, ...props }) => {
 	const styles = templateMap[template];
 
 	return (
-		<Document pageMode="fullScreen" title={projectTitle ?? "Proposal"}>
+		<Document
+			pageMode="fullScreen"
+			title={`${projectTitle}_${template}` ?? "Proposal"}
+			subject={projectTitle}
+		>
 			<Page wrap size="A4" style={styles.page}>
 				{/* Header */}
 				<View style={styles.headerSection}>
