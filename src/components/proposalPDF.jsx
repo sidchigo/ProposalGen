@@ -17,7 +17,7 @@ Font.register({
 
 Font.register({
 	family: "NunitoSemiBold",
-	fonts: [{ src: "/fonts/NunitoSemibold.ttf" }],
+	fonts: [{ src: "/fonts/NunitoSemiBold.ttf" }],
 });
 
 Font.register({
